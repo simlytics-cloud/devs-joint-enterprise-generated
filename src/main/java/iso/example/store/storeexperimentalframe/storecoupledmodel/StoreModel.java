@@ -5,18 +5,19 @@ package iso.example.store.storeexperimentalframe.storecoupledmodel;
 import iso.example.store.immutables.*;
 import devs.Port;
 import devs.msg.Bag;
+import devs.msg.PortValue;
 import devs.msg.time.LongSimTime;
 import devs.PDEVSModel;
 import java.util.List;
-
+import java.util.ArrayList;
 
 public abstract class StoreModel extends PDEVSModel<LongSimTime, ModifiableStoreModelState> {
 
 public static String modelIdentifier = "storeModel";
-    public static Port<Customer> customerArrival = new Port<>("CUSTOMER_ARRIVAL");
-    public static Port<Shipment> receiveShipment = new Port<>("RECEIVE_SHIPMENT");
-    public static Port<Customer> customerDeparture = new Port<>("CUSTOMER_DEPARTURE");
-    public static Port<Order> sendOrder = new Port<>("SEND_ORDER");
+    public static Port<Customer> customerArrival = new Port<>("customerArrival");
+    public static Port<Shipment> receiveShipment = new Port<>("receiveShipment");
+    public static Port<Customer> customerDeparture = new Port<>("customerDeparture");
+    public static Port<Order> sendOrder = new Port<>("sendOrder");
 
 
     protected StoreModelProperties properties;
@@ -31,19 +32,36 @@ public static String modelIdentifier = "storeModel";
     protected abstract Order ordering();
 
     protected abstract void processDelivery(Shipment shipment);
-    @Override
-    protected Bag outputFunction() {
-        Bag.Builder bagBuilder = Bag.builder();
+    protected boolean hasPendingOutput() {
+        if (!modelState.getPendingCustomerDepartureOut().isEmpty()) {
+            return true;
+        }
+        if (!modelState.getPendingSendOrderOut().isEmpty()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    protected List<PortValue<?>> getPendingOutput() {
+        List<PortValue<?>> pendingOutputs = new ArrayList<>();
         for (Customer customer : modelState.getPendingCustomerDepartureOut()) {
-            bagBuilder.addPortValueList(StoreModel.customerDeparture.createPortValue(customer));
+            pendingOutputs.add(StoreModel.customerDeparture.createPortValue(customer));
         }
         modelState.getPendingCustomerDepartureOut().clear();
 
         for (Order order : modelState.getPendingSendOrderOut()) {
-            bagBuilder.addPortValueList(StoreModel.sendOrder.createPortValue(order));
+            pendingOutputs.add(StoreModel.sendOrder.createPortValue(order));
         }
         modelState.getPendingSendOrderOut().clear();
 
+        return pendingOutputs;
+    }
+
+    @Override
+    protected Bag outputFunction() {
+        Bag.Builder bagBuilder = Bag.builder();
+        bagBuilder.addAllPortValueList(getPendingOutput());
         return bagBuilder.build();
     }
 

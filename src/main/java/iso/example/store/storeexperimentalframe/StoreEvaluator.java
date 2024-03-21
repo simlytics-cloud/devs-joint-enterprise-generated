@@ -5,15 +5,16 @@ package iso.example.store.storeexperimentalframe;
 import iso.example.store.immutables.*;
 import devs.Port;
 import devs.msg.Bag;
+import devs.msg.PortValue;
 import devs.msg.time.LongSimTime;
 import devs.PDEVSModel;
 import java.util.List;
-
+import java.util.ArrayList;
 
 public abstract class StoreEvaluator extends PDEVSModel<LongSimTime, ModifiableStoreEvaluatorState> {
 
 public static String modelIdentifier = "storeEvaluator";
-    public static Port<Customer> customerIn = new Port<>("CUSTOMER_IN");
+    public static Port<Customer> customerIn = new Port<>("customerIn");
 
 
     protected StoreEvaluatorProperties properties;
@@ -24,10 +25,21 @@ public static String modelIdentifier = "storeEvaluator";
     }
 
     protected abstract void logCustomer(Customer customer);
+    protected boolean hasPendingOutput() {
+
+        return false;
+    }
+
+    protected List<PortValue<?>> getPendingOutput() {
+        List<PortValue<?>> pendingOutputs = new ArrayList<>();
+
+        return pendingOutputs;
+    }
+
     @Override
     protected Bag outputFunction() {
         Bag.Builder bagBuilder = Bag.builder();
-
+        bagBuilder.addAllPortValueList(getPendingOutput());
         return bagBuilder.build();
     }
 
