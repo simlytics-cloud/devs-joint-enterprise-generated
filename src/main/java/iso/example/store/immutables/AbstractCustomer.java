@@ -15,6 +15,12 @@ import javax.annotation.Nullable;
 
 public abstract class AbstractCustomer {
 
+    /**
+    * The product the customer is looking for
+     */
     public abstract Product getProduct();
+    /**
+    * True if the customer actually purchases the product in the store.
+     */
     public abstract Boolean getPurchasedProduct();
 }

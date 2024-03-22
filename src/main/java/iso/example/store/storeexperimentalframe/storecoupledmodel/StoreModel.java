@@ -27,6 +27,12 @@ public static String modelIdentifier = "storeModel";
         this.properties = properties;
     }
 
+    /** This operation is called when a cusotmer enters the store.  The customer is looking for a specific product.  
+     * If the product is available in the stockage, it decrements the stockage by one and updates the customer's 
+     * purchasedProduct field to true.  If there is no stockage available, this field is set to false.  It adds the
+     * customer to the pending output for the CustomerDeparture port.
+     * @param customer 
+     */
     protected abstract void processCustomer(Customer customer);
 
     protected abstract Order ordering();
