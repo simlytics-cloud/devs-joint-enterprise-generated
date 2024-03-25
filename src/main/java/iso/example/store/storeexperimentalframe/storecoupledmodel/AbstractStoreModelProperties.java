@@ -16,6 +16,9 @@ import javax.annotation.Nullable;
 public abstract class AbstractStoreModelProperties {
 
     public abstract String getAddress();
+    /**
+    * A list of ProductDemand for all of the products customers buy in the store.
+     */
     public abstract List<ProductDemand> getProductdemand();
     public abstract Integer getOrderInterval();
     public abstract String getStoreName();

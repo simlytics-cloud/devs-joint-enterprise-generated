@@ -16,7 +16,13 @@ import javax.annotation.Nullable;
 public abstract class AbstractStore {
 
     public abstract String getAddress();
+    /**
+    * A list of ProductDemand for all of the products customers buy in the store.
+     */
     public abstract List<ProductDemand> getProductdemand();
+    /**
+    * A list of PruductStock elements for all products stocked in the store.
+     */
     public abstract List<ProductStock> getProductstock();
     public abstract Integer getOrderInterval();
     public abstract String getStoreName();

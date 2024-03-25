@@ -15,7 +15,16 @@ import javax.annotation.Nullable;
 
 public abstract class AbstractOrder {
 
+    /**
+    * The data of the product request formatted as an ISO Format (YYYY-MM-DDThh:mm:ss).
+     */
     public abstract String getDate();
+    /**
+    * A list of ProductRequest (product and quantity) elements for this order.
+     */
     public abstract List<ProductRequest> getProductRequest();
+    /**
+    * The name of the store submitting the order.
+     */
     public abstract String getStoreName();
 }

@@ -35,8 +35,13 @@ public static String modelIdentifier = "storeModel";
      */
     protected abstract void processCustomer(Customer customer);
 
+    /** This operation represents store ordering.  At a designated interval, store employees check stockages.  If stockage for a product is below a certain threshold, they will order a fixed number from the supplier.
+     */
     protected abstract Order ordering();
 
+    /** As a delivery enters the store, the product stock for each product in the delivery is updated accordingly.
+     * @param shipment 
+     */
     protected abstract void processDelivery(Shipment shipment);
     protected boolean hasPendingOutput() {
         if (!modelState.getPendingCustomerDepartureOut().isEmpty()) {

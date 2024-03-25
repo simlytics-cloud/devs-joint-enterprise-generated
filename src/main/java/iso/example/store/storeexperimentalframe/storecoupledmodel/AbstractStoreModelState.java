@@ -17,6 +17,9 @@ import javax.annotation.Nullable;
 public abstract class AbstractStoreModelState {
 
     public abstract Integer getLastOrderTime();
+    /**
+    * A list of PruductStock elements for all products stocked in the store.
+     */
     public abstract List<ProductStock> getProductstock();
     public abstract List<Order> getPendingSendOrderOut();
     public abstract List<Customer> getPendingCustomerDepartureOut();

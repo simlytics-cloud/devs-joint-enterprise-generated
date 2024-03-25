@@ -15,7 +15,16 @@ import javax.annotation.Nullable;
 
 public abstract class AbstractProduct {
 
+    /**
+    * The name of the product.  Must be unique across the enterprise.
+     */
     public abstract String getName();
+    /**
+    * The cost of one product in dollars.
+     */
     public abstract Double getCost();
+    /**
+    * The weight of one product in pounds.
+     */
     public abstract Double getWeight();
 }
