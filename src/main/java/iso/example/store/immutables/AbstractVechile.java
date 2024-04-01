@@ -16,4 +16,5 @@ import javax.annotation.Nullable;
 public abstract class AbstractVechile {
 
     public abstract Double getPayloadCapacity();
+    public abstract String getVehicleId();
 }

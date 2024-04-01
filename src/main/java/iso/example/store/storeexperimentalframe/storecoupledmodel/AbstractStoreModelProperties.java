@@ -22,4 +22,5 @@ public abstract class AbstractStoreModelProperties {
     public abstract List<ProductDemand> getProductdemand();
     public abstract Integer getOrderInterval();
     public abstract String getStoreName();
+    public abstract Integer getOrderQuantity();
 }

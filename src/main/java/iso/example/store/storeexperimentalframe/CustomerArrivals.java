@@ -38,9 +38,14 @@ public static String modelIdentifier = "customerArrivals";
         for (Customer customer : modelState.getPendingCustomerOutOut()) {
             pendingOutputs.add(CustomerArrivals.customerOut.createPortValue(customer));
         }
-        modelState.getPendingCustomerOutOut().clear();
 
         return pendingOutputs;
+    }
+
+    protected boolean clearPendingOutput() {
+        modelState.getPendingCustomerOutOut().clear();
+
+        return false;
     }
 
     @Override

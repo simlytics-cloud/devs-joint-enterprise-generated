@@ -39,9 +39,14 @@ public static String modelIdentifier = "supplierModel";
         for (Shipment shipment : modelState.getPendingSendShipmentOut()) {
             pendingOutputs.add(SupplierModel.sendShipment.createPortValue(shipment));
         }
-        modelState.getPendingSendShipmentOut().clear();
 
         return pendingOutputs;
+    }
+
+    protected boolean clearPendingOutput() {
+        modelState.getPendingSendShipmentOut().clear();
+
+        return false;
     }
 
     @Override

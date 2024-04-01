@@ -15,8 +15,8 @@ import javax.annotation.Nullable;
 
 public abstract class AbstractShipment {
 
-    public abstract Plant getPlant();
+    public abstract String getPlantName();
     public abstract Vechile getVechile();
-    public abstract List<Store> getStore();
+    public abstract String getStoreName();
     public abstract List<ProductShipped> getProductshipped();
 }

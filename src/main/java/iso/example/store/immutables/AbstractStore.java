@@ -26,4 +26,5 @@ public abstract class AbstractStore {
     public abstract List<ProductStock> getProductstock();
     public abstract Integer getOrderInterval();
     public abstract String getStoreName();
+    public abstract Integer getOrderQuantity();
 }

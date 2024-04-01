@@ -59,14 +59,19 @@ public static String modelIdentifier = "storeModel";
         for (Customer customer : modelState.getPendingCustomerDepartureOut()) {
             pendingOutputs.add(StoreModel.customerDeparture.createPortValue(customer));
         }
-        modelState.getPendingCustomerDepartureOut().clear();
 
         for (Order order : modelState.getPendingSendOrderOut()) {
             pendingOutputs.add(StoreModel.sendOrder.createPortValue(order));
         }
-        modelState.getPendingSendOrderOut().clear();
 
         return pendingOutputs;
+    }
+
+    protected boolean clearPendingOutput() {
+        modelState.getPendingCustomerDepartureOut().clear();
+        modelState.getPendingSendOrderOut().clear();
+
+        return false;
     }
 
     @Override

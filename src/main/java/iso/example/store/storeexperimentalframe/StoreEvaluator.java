@@ -36,6 +36,11 @@ public static String modelIdentifier = "storeEvaluator";
         return pendingOutputs;
     }
 
+    protected boolean clearPendingOutput() {
+
+        return false;
+    }
+
     @Override
     protected Bag outputFunction() {
         Bag.Builder bagBuilder = Bag.builder();

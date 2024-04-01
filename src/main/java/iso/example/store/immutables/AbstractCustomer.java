@@ -15,6 +15,7 @@ import javax.annotation.Nullable;
 
 public abstract class AbstractCustomer {
 
+    public abstract String getCustomerId();
     /**
     * The product the customer is looking for
      */
